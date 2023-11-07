@@ -1,0 +1,53 @@
+/* formStyles.module.css */
+.formContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: #a0adb6; /* Dark gray background */
+	padding: 40px;
+	border-radius: 8px;
+	max-width: 340px;
+	margin: 100px auto; /* Center the form on the page vertically and horizontally */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
+  }
+  
+  .formField {
+	background-color: #3A4147; /* Slightly lighter gray for the input fields */
+	border: 1px solid #272D33; /* Subtle border for the input fields */
+	border-radius: 4px;
+	padding: 12px 20px;
+	margin-bottom: 20px; /* Space between fields */
+	width: 100%; /* Full width of the form container */
+	color: #FFFFFF; /* White text */
+	font-size: 16px; /* Slightly larger font for better readability */
+	
+  }
+  
+  .formField::placeholder {
+	color: #B1B1B1; /* Lighter gray placeholder text for better contrast */
+  }
+  
+  .submitButton {
+	background-color: #1F2427; /* Even darker gray for the button for contrast */
+	border: none;
+	border-radius: 4px;
+	padding: 12px 20px;
+	width: 100%; /* Full width of the form container */
+	color: #FFFFFF; /* White text */
+	cursor: pointer;
+	font-size: 16px; /* Matching the font size of the form fields */
+	transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  }
+  
+  .submitButton:hover {
+	background-color: #14181B; /* Slightly lighter gray when hovering over the button */
+  }
+  
+  /* Responsive design for larger screens */
+  @media (min-width: 768px) {
+	.formContainer {
+	  max-width: 400px;
+	}
+  }
+  
