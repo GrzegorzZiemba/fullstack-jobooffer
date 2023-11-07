@@ -7,7 +7,8 @@ const router = express.Router()
 router.post('/createuser', async(req,res)=> {
     console.log('creating')
     try {
-        const user = req.body      
+        const user = req.body  
+        console.log(user)    
         const createUser = new User({
             ...user
         })
@@ -50,3 +51,5 @@ router.post("/logout", auth, async (req, res) => {
     }
 	
 });
+
+export default router

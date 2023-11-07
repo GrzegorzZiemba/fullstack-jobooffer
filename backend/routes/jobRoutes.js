@@ -51,3 +51,5 @@ router.delete('/delete', auth, async(req,res)=>{
         console.log("ERROR")
     }
 })
+
+export default router

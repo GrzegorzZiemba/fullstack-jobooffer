@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 
 const userSchema = new mongoose.Schema({
-	userName: {
+	username: {
 		type: String,
 		requried: true,
 		trim: true,
@@ -30,7 +30,8 @@ const userSchema = new mongoose.Schema({
 	},
 	isRecruiter: {
 		type :Boolean, 
-		required: true,
+		required: false,
+		default: false,
 
 	},
 
