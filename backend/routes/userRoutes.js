@@ -21,13 +21,14 @@ router.post('/createuser', async(req,res)=> {
 })
 
 router.post("/login", async (req, res) => {
+    console.log("lOngin")
 	try {
 		const user = await User.loginUser(req.body.email, req.body.password);
 
 		const token = await user.generateAuthToken();
 		const mail = user.email;
 		const id = user._id.toString();
-
+        console.log(token, mail, id)
 		res.send({ mail, token, id });
 	} catch (e) {
 		res.status(400).send({ error: "Cannot login" });

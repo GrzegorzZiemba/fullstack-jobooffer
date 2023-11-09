@@ -4,8 +4,28 @@ import * as Yup from 'yup';
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import styles from '../Form.module.css'
+import {useLoginUserMutation} from '../../slices/userApiSlice'
+import { setCredentials } from '../../slices/authApiSlice';
+import { useDispatch } from 'react-redux';
 
 const LoginAccountForm = () => {
+	const [loginUser, {isLoading, isSuccess, isError, error}] = useLoginUserMutation()
+	let navigate = useNavigate();
+	const dispatch = useDispatch()
+
+	const handleSubmit = async (values) => {
+		try {
+			console.log(values)
+		  const user = await loginUser(values).unwrap();
+		  dispatch(setCredentials({ ...user }));
+
+		  // Navigate to some page after successful creation, e.g., login page
+		  navigate('/');
+		} catch (err) {
+		  console.error('Failed to login the account: ', err);
+		}
+	  };
+
   return (
     <Formik
 			initialValues={{ email: "", password: "" }}
@@ -13,11 +33,12 @@ const LoginAccountForm = () => {
 				email: Yup.string(),
 				password: Yup.string(),
 			})}
-			onSubmit={(values, { setSubmitting }) => {
-				 console.log(values.email)
-				console.log(values.password)
+			// onSubmit={(values, { setSubmitting }) => {
+			// 	 console.log(values.email)
+			// 	console.log(values.password)
 					
-			}}
+			// }}
+			onSubmit={handleSubmit}
 		>
             <div className={styles.formContainer}>
 			<h1>LOGIN</h1>
