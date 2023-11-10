@@ -5,7 +5,10 @@ const router = express.Router()
 
 router.post('/createjob', auth, async(req,res) => {
     try {
+
         const jobbody = req.body
+        console.log(auth)
+        console.log(jobbody)
         if(auth){
         const job = new Job({
                 ...jobbody,

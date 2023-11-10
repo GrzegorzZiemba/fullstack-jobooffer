@@ -6,16 +6,20 @@ import { useNavigate } from "react-router-dom";
 import styles from '../Form.module.css';
 // Import the hook from your API slice
 import { useCreateUserMutation } from "../../slices/userApiSlice"
+import {setCredentials} from '../../slices/authApiSlice'
+import { useDispatch } from 'react-redux';
 
 const CreateAccountForm = () => {
   const [createUser, { isLoading, isSuccess, isError, error }] = useCreateUserMutation();
   let navigate = useNavigate();
-
+  const dispatch = useDispatch()
   const handleSubmit = async (values) => {
     try {
       const user = await createUser(values).unwrap();
+      dispatch(setCredentials({ ...user }));
+      
       // Navigate to some page after successful creation, e.g., login page
-      navigate('/login');
+      navigate('/');
     } catch (err) {
       console.error('Failed to create the account: ', err);
     }

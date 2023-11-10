@@ -1,71 +1,61 @@
-import React, {useState} from 'react'
+import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router";
-import styles from '../components/Form.module.css'
+import { useNavigate } from "react-router-dom"; // Make sure to import from 'react-router-dom' not 'react-router'
+import styles from '../components/Form.module.css';
+import { useCreateJobMutation } from '../slices/jobApiSlice';
 
 const AddJobPage = () => {
-  return (
-    <Formik
-			initialValues={{ position: "", salary: "", city: "" }}
+	const [createJobPost] = useCreateJobMutation();
+	let navigate = useNavigate();
+	
+	const handleSubmit = async (values) => {
+		console.log('AddJobPost');
+		try {
+			const job = await createJobPost(values).unwrap();
+			console.log(job)
+			navigate('/');
+		} catch (err) {
+			console.error('Failed to create jobpost: ', err);
+		}
+	};
+
+	return (
+		<Formik
+			initialValues={{ position: "", salary: "", city: "", description: "" }}
 			validationSchema={Yup.object({
-				position: Yup.string(),
-				salary: Yup.string(),
-                city: Yup.string(),
-                description: Yup.string()
+				position: Yup.string().required('Position is required'),
+				salary: Yup.string().required('Salary is required'),
+				city: Yup.string().required('City is required'),
+				description: Yup.string().required('Description is required')
 			})}
-			onSubmit={(values, { setSubmitting }) => {
-                setSubmitting(false)
-				console.log(values.position)
-				console.log(values.salary)
-                console.log(values.city)
-                console.log(values.description)
-					
-			}}
+			onSubmit={handleSubmit}
 		>
-            <div className={styles.formContainer}>
-			<h1>LOGIN</h1>
+			<div className={styles.formContainer}>
+				<h1>Add Job</h1>
+				<Form>
+					<label htmlFor="position">Position</label>
+					<Field className={styles.formField} name="position" type="text" />
+					<ErrorMessage name="position" component="div" className="error" />
 
-			<Form>
-            <label htmlFor="position">Position</label>
-				<Field
-					className={styles.formField}
-					name="position"
-					type="text"
-				/>
-				<ErrorMessage name="position" component="div" style={{ color: "red" }} />
+					<label htmlFor="salary">Salary</label>
+					<Field className={styles.formField} name="salary" type="text" />
+					<ErrorMessage name="salary" component="div" className="error" />
 
-				<label htmlFor="salary">salary</label>
-				<Field
-					className={styles.formField}
-					name="salary"
-					type="text"
-				/>
-				<ErrorMessage name="salary" component="div" style={{ color: "red" }} />
+					<label htmlFor="city">City</label>
+					<Field className={styles.formField} name="city" type="text" />
+					<ErrorMessage name="city" component="div" className="error" />
 
-                <label htmlFor="city">city</label>
-				<Field
-					className={styles.formField}
-					name="city"
-					type="text"
-				/>
-				<ErrorMessage name="salary" component="div" style={{ color: "red" }} />
-				<label htmlFor="description">description</label>
-				<Field
-					className={styles.formField}
-					name="description"
-					type="text"
-				/>
-				<ErrorMessage name="salary" component="div" style={{ color: "red" }} />
-				
+					<label htmlFor="description">Description</label>
+					<Field as="textarea" className={styles.formField} name="description" />
+					<ErrorMessage name="description" component="div" className="error" />
 
-
-				<Button className='button-main' type="submit">Submit</Button>
-			</Form>
-            </div>
+					<Button className='button-main' type="submit">Submit</Button>
+				</Form>
+			</div>
 		</Formik>
 	);
 }
 
-export default AddJobPage
+export default AddJobPage;

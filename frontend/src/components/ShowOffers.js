@@ -24,7 +24,6 @@ const ShowOffers = ({ image, id, workplace, position, iden }) => {
 					<CardMedia
 						style={{height: 140}}
 						image={image}
-						onError='tocreate'
 						title='title'
 					/>
 					<CardContent>

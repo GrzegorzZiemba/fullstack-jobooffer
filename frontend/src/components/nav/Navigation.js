@@ -1,11 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import styles from "./Nav.module.css";
 import logo from "../../images/logo.png";
 import { BsPersonFillLock,  BsPersonFillAdd} from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { useLogoutUserMutation } from "../../slices/userApiSlice";
+import { logout } from "../../slices/authApiSlice";
 
 const Navigation = () => {
+
+	const {userInfo} = useSelector(state => state.auth)
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	const [logoutApiCall] = useLogoutUserMutation()
+
+	const logoutHandler = async () => {
+		try {
+			await logoutApiCall().unwrap()
+			dispatch(logout())
+			navigate('/login')
+		} catch (error) {
+			console.error(error)
+		}
+	}
 	return (
 		<nav className={styles.navbar}>
 			<div className={styles.container}>
@@ -26,16 +44,26 @@ const Navigation = () => {
 					</LinkContainer>
 					<span className={styles.separator}></span>
 
-			
-						<Link to="/signout" className={styles.nofocus}>
+						{userInfo ? (
+													<button className={styles.button}
+													onClick={logoutHandler}>
 							<BsPersonFillAdd />
 							<p className={styles.paragraph}>Sign out</p>
-						</Link>
-			
-						<Link to="/login" className={styles.nofocus}>
-							<BsPersonFillLock />
-							<p className={styles.paragraph}>Sign in</p>
-						</Link>
+						</button>
+						): (
+							<>
+												<Link to="/signout" className={styles.nofocus}>
+													<BsPersonFillAdd />
+													<p className={styles.paragraph}>Sign out</p>
+												</Link>
+									
+												<Link to="/login" className={styles.nofocus}>
+													<BsPersonFillLock />
+													<p className={styles.paragraph}>Sign in</p>
+								</Link>
+								</>
+						)}
+						
 			
 				</div>
 			</div>

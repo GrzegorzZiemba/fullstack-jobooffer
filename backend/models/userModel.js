@@ -35,14 +35,10 @@ const userSchema = new mongoose.Schema({
 
 	},
 
-	tokens: [
-		{
-			token: {
+	tokens: {
 				type: String,
-				required: true,
-			},
-		},
-	],
+				required: true,}
+			
 });
 
 userSchema.pre("save", async function (next) {
@@ -57,12 +53,20 @@ userSchema.pre("save", async function (next) {
 
 userSchema.methods.generateAuthToken = async function () {
 	const user = this;
-	
+	console.log("HELLO")
 	const token = jwt.sign({ _id: user._id.toString() }, process.env.SECRET_JWT);
-
-	user.tokens = user.tokens.concat({ token });
+	console.log(token)
+	  user.tokens = token 
 	await user.save();
 
+	//   res.cookie('jwt', token, {
+	// 	httpOnly: true,
+	// 	secure: process.env.NODE_ENV !== 'development', // Use secure cookies in production
+	// 	sameSite: 'strict', // Prevent CSRF attacks
+	// 	maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+	//   });
+
+	
 	return token;
 };
 

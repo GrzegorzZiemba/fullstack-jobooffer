@@ -2,30 +2,26 @@ import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
 
 const auth = async (req, res, next) => {
-	try {
-		
-		const token = req.header("Authorization").replace("Bearer", "");
-		
-		const tokenToVerify = JSON.parse(token);
-		
+	console.log("EEE")
+	console.log(req.cookies)
 
-		const decoded = jwt.verify(tokenToVerify, process.env.SECRET_JWT);
-		
-		const user = await User.findOne({
-			_id: decoded._id,
-			token: token,
-		});
+  // Read JWT from the 'jwt' cookie
+  let token  = req.cookies.jwt;
+	console.log(token)
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, process.env.SECRET_JWT);
 
-		if (!user) {
-			throw new Error();
-		}
-		
-		req.token = token;
-		req.user = user;
-		next();
-	} catch (e) {
-		res.send({ error: "PLease Authentiace" });
-	}
+      req.user = await User.findById(decoded.userId);
+
+      next();
+    } catch (error) {
+      console.error(error);
+      res.status(401).send({msg: "Wrong Token"});
+      
+    }
+  } else {
+    res.status(401).send({msg: "No token!"})  }
 };
 
 export default auth;

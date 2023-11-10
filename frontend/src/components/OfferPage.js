@@ -14,7 +14,6 @@ const OfferPage = () => {
 					<img
 						src="/"
 						className={styles.img}
-						// onError={addDefaultSrc}
 						alt="Cloudy Sky"
 					/>
 					<h1>{work}</h1>

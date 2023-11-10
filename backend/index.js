@@ -5,15 +5,19 @@ import bodyParser from 'body-parser'
 import { createMongoDb } from "./db/mongodb.js";
 import userRoutes from './routes/userRoutes.js'
 import jobRoutes from './routes/jobRoutes.js'
+import cookieParser from 'cookie-parser';
 
 dotenv.config()
 
 
 const app = express()
 
+app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors())
+
+
 createMongoDb()
 app.use(userRoutes)
 app.use(jobRoutes)

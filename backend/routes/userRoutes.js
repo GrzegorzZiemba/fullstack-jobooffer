@@ -15,21 +15,25 @@ router.post('/createuser', async(req,res)=> {
         await createUser.save()
         const token = await createUser.generateAuthToken()
         console.log(token)
+        res.send({token})
     } catch (error) {
         console.log("error")
     } 
 })
 
 router.post("/login", async (req, res) => {
-    console.log("lOngin")
+    console.log("Login")
 	try {
 		const user = await User.loginUser(req.body.email, req.body.password);
-
 		const token = await user.generateAuthToken();
-		const mail = user.email;
-		const id = user._id.toString();
-        console.log(token, mail, id)
-		res.send({ mail, token, id });
+	
+        console.log(token)
+        res.cookie('jwt', token, {
+		httpOnly: true,
+        })
+        res.send({token})
+
+		
 	} catch (e) {
 		res.status(400).send({ error: "Cannot login" });
 	}
@@ -43,6 +47,10 @@ router.post("/logout", auth, async (req, res) => {
             const user = await User.findById({ _id: id });
             user.tokens = [];
             user.save();
+            res.cookie('jwt', '', {
+                httpOnly: true,
+                expires: new Date(0),
+              });
             res.status(200).send({ text: "Logged Out" });
         } catch (e) {
             res.status(400).send({ error: "Cannot logout" });
