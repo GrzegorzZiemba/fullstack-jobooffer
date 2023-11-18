@@ -52,4 +52,25 @@ router.delete("/delete", auth, async (req, res) => {
   }
 });
 
+router.get("/allposts", async (req, res) => {
+  try {
+    const jobs = await Job.find({});
+    console.log(jobs);
+    res.send(jobs);
+  } catch (error) {
+    console.log(errors);
+  }
+});
+
+router.get("/posts/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const job = await Job.find({ _id: id });
+    console.log(job);
+    res.send(job);
+  } catch (error) {
+    console.log("error");
+  }
+});
+
 export default router;

@@ -12,32 +12,24 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { LinkContainer } from "react-router-bootstrap";
 
-
-
 const ShowOffers = ({ image, id, workplace, position, iden }) => {
-
+  console.log(id);
   return (
-        <Card style={{width: 345,
-            margin: 20,}}>
-			<LinkContainer to={`/offer/someID`}>
-				<CardActionArea>
-					<CardMedia
-						style={{height: 140}}
-						image={image}
-						title='title'
-					/>
-					<CardContent>
-						<Typography gutterBottom variant="h5" component="h2">
-							
-								"Work offer is disabled, due to expiriation date"
-						</Typography>
-						<Typography variant="body2" color="textSecondary" component="p">
-							{position}
-						</Typography>
-					</CardContent>
-				</CardActionArea>
-			</LinkContainer>
-			{/* {uid === iden && uid !== "" ? (
+    <Card style={{ width: 345, margin: 20 }}>
+      <LinkContainer to={`/offer/${id}`}>
+        <CardActionArea>
+          <CardMedia style={{ height: 140 }} image={image} title="title" />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              "Work offer is disabled, due to expiriation date"
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {position}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </LinkContainer>
+      {/* {uid === iden && uid !== "" ? (
 				<CardActions>
 					{activeTill > today ? (
 						<Link to={`/edit/${id}`}>
@@ -56,8 +48,8 @@ const ShowOffers = ({ image, id, workplace, position, iden }) => {
 			) : (
 				<div>{console.log(uid, iden)}</div>
 			)} */}
-		</Card>
-  )
-}
+    </Card>
+  );
+};
 
-export default ShowOffers
+export default ShowOffers;
