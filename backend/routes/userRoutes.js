@@ -32,7 +32,8 @@ router.post("/login", async (req, res) => {
       httpOnly: true,
       maxAge: 580000000,
     });
-    res.send({ token });
+    console.log("Done cookie");
+    res.send({ user: user._id });
   } catch (e) {
     res.status(400).send({ error: "Cannot login" });
   }

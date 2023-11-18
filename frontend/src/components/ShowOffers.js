@@ -12,7 +12,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { LinkContainer } from "react-router-bootstrap";
 
-const ShowOffers = ({ image, id, workplace, position, iden }) => {
+const ShowOffers = ({ image, id, position }) => {
   console.log(id);
   return (
     <Card style={{ width: 345, margin: 20 }}>
@@ -29,6 +29,7 @@ const ShowOffers = ({ image, id, workplace, position, iden }) => {
           </CardContent>
         </CardActionArea>
       </LinkContainer>
+
       {/* {uid === iden && uid !== "" ? (
 				<CardActions>
 					{activeTill > today ? (

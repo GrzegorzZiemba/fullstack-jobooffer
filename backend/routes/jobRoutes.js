@@ -6,12 +6,17 @@ const router = express.Router();
 
 router.post("/createjob", auth, async (req, res) => {
   console.log("CREATE JOB");
+  console.log(">>>>>");
+  console.log(req.body);
+  console.log("<<<<<");
+
   try {
     const jobbody = req.body;
     if (auth) {
+      console.log(auth);
       const job = new Job({
         ...jobbody,
-        userId: auth._id,
+        userId: jobbody.userId,
       });
       job.save();
 

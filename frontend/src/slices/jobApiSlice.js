@@ -3,8 +3,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "../constans";
 
 const getUserIdFromLocalStorage = () => {
-  const currentUser = localStorage.getItem("currentUser");
-  return currentUser ? JSON.parse(currentUser).userId : undefined;
+  const currentUser = localStorage.getItem("userInfo");
+  console.log(currentUser);
+
+  return currentUser ? JSON.parse(currentUser).user : undefined;
 };
 
 export const jobApiSlice = createApi({
