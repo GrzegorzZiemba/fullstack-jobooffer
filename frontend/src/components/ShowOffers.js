@@ -21,7 +21,7 @@ const ShowOffers = ({ image, id, workplace, position, iden }) => {
           <CardMedia style={{ height: 140 }} image={image} title="title" />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              "Work offer is disabled, due to expiriation date"
+              {position}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               {position}

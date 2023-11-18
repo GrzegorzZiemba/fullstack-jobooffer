@@ -11,18 +11,22 @@ const OfferPage = () => {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading jobs!</p>;
 
-  const city = "Poznan";
-  const work = "Working srorking";
-  console.log(data);
   return (
     <div className={styles.container}>
       <div className={styles.left}>
         <div className={styles.imgContainer}>
-          <img src="/" className={styles.img} alt="Cloudy Sky" />
-          <h1>{work}</h1>
+          <img
+            src={data[0].image ? data[0].image : ""}
+            className={styles.img}
+            alt="Cloudy Sky"
+          />
+          <h1>{data[0].company}</h1>
         </div>
         <div className={styles.infoContainer}>
-          <div className={styles.info}></div>
+          <div className={styles.info}>
+            <h3>Company </h3>
+            <p>{data[0].company}</p>
+          </div>
           <div className={styles.info}>
             <h3>Position </h3>
             <p>{data[0].position}</p>
@@ -39,7 +43,7 @@ const OfferPage = () => {
             <h3>Description </h3>
             <p>{data[0].description}</p>
           </div>
-          <div className={styles.info}>
+          {/* <div className={styles.info}>
             <h3>Expiry Date</h3>
             <p>
               Offer is not valid
@@ -48,15 +52,15 @@ const OfferPage = () => {
 							{formatDate(activeTill) !== "NaN-NaN-NaN"
 								? formatDate(activeTill)
 								: " Offer is not valid "} */}
-            </p>{" "}
-          </div>
+          {/* </p>{" "}
+          </div> */}{" "}
         </div>
         <Link className="btn btn-light my-3" to="/">
           Home
         </Link>
       </div>
       <div className={styles.map}>
-        <Map city={data[0].city} work={work} />
+        <Map city={data[0].city} work={data[0].company} />
       </div>
     </div>
   );

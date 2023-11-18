@@ -16,6 +16,7 @@ router.post("/createjob", auth, async (req, res) => {
       job.save();
 
       console.log("ok");
+      res.send({ message: "DONE" });
     } else {
       console.log("do not able to do");
     }
