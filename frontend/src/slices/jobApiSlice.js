@@ -39,7 +39,7 @@ export const jobApiSlice = createApi({
     updateJob: builder.mutation({
       query: ({ jobId, ...jobData }) => ({
         url: "/updatejob",
-        method: "PUT",
+        method: "POST",
         body: { ...jobData, jobId, userId: getUserIdFromLocalStorage() },
       }),
       invalidatesTags: ["Jobs"], // Invalidate 'Jobs' on success

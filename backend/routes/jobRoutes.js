@@ -32,10 +32,17 @@ router.post("/createjob", auth, async (req, res) => {
 });
 
 router.post("/updatejob", auth, async (req, res) => {
+  console.log(req.body);
+  const { userId } = req.body;
+  const { jobId } = req.body;
+
+  console.log(jobId);
+  const job = await Job.find({ _id: jobId });
   try {
     const jobbody = req.body;
-    if (auth._id === jobbody.userId) {
-      console.log("can");
+    if (job[0].userId == userId) {
+      await Job.findByIdAndUpdate({ _id: job[0]._id }, { ...jobbody });
+      res.send({ data: "Done" });
     } else {
       console.log("cannot");
     }

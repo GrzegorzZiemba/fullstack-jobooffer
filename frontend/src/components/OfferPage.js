@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useDeleteJobMutation, useGetJobQuery } from "../slices/jobApiSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { LinkContainer } from "react-router-bootstrap";
 const OfferPage = () => {
   const { id: jobId } = useParams();
   const { userInfo } = useSelector((state) => state.auth);
@@ -70,7 +71,10 @@ const OfferPage = () => {
           {/* </p>{" "}
           </div> */}{" "}
           {userInfo.user === data[0].userId ? (
-            <button onClick={deleteHandler}>Can delete</button>
+            <div>
+              <button onClick={deleteHandler}>Can delete</button>
+              <Link to={`/edit/${jobId}`}>edit</Link>
+            </div>
           ) : (
             <h2>cannot delete</h2>
           )}

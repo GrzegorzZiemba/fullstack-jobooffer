@@ -11,6 +11,7 @@ import Login from "./components/Login";
 import OfferPage from "./components/OfferPage";
 import PrivateRoute from "./components/PrivateRoute";
 import AddJobPage from "./pages/AddJobPage";
+import EditJobPage from "./pages/EditJobPage";
 
 // import SignOut from "./components/SignOut";
 // import EditJobForm from "./components/EditJobForm"; // Assuming you have this component
@@ -25,11 +26,11 @@ export const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="offer" element={<OfferPage />} />
       <Route path="/offer/:id" element={<OfferPage />} />
+      <Route path="/edit/:id" element={<EditJobPage />} />
 
       <Route element={<PrivateRoute />}>
         <Route path="addnewjob" element={<AddJobPage />} />
         {/* <Route path="signout" element={<SignOut />} /> */}
-        {/* <Route path="edit/:jobId" element={<EditJobForm />} /> */}
       </Route>
     </Route>
   )

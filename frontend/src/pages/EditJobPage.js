@@ -2,38 +2,45 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom"; // Make sure to import from 'react-router-dom' not 'react-router'
+import { useNavigate, useParams } from "react-router-dom"; // Make sure to import from 'react-router-dom' not 'react-router'
 import styles from "../components/Form.module.css";
-import { useCreateJobMutation } from "../slices/jobApiSlice";
+import { useGetJobQuery, useUpdateJobMutation } from "../slices/jobApiSlice";
 
-const AddJobPage = () => {
-  const [createJobPost] = useCreateJobMutation();
-  let navigate = useNavigate();
-
+const EditJobPage = () => {
+  const { id: jobId } = useParams();
+  console.log(jobId);
+  const { data, isLoading, error } = useGetJobQuery(jobId);
+  console.log(data);
+  const [editJobPost] = useUpdateJobMutation();
+  const navigate = useNavigate();
   const handleSubmit = async (values) => {
-    console.log("AddJobPost");
+    const payload = {
+      jobId,
+      ...values,
+    };
     try {
-      const response = await createJobPost(values);
-      console.log("Response:", response); // Log the full response
+      const response = await editJobPost(payload).unwrap();
+      console.log(response);
       if (response.data) {
         navigate("/");
       } else {
-        console.error("No data in response", response.error);
+        console.log("Error");
       }
-    } catch (err) {
-      console.error("Failed to create jobpost: ", err);
+    } catch (error) {
+      console.log("Error in error :D");
     }
   };
-
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error loading jobs!</p>;
   return (
     <Formik
       initialValues={{
-        position: "",
-        salary: 0,
-        city: "",
-        description: "",
-        company: "",
-        image: "",
+        company: data[0].company,
+        position: data[0].position,
+        salary: data[0].salary,
+        city: data[0].city,
+        description: data[0].description,
+        image: data[0].image,
       }}
       validationSchema={Yup.object({
         company: Yup.string().required("Comapany is required"),
@@ -87,4 +94,4 @@ const AddJobPage = () => {
   );
 };
 
-export default AddJobPage;
+export default EditJobPage;
