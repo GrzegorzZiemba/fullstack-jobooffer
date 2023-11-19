@@ -12,12 +12,15 @@ const getUserIdFromLocalStorage = () => {
 export const jobApiSlice = createApi({
   reducerPath: "jobApi",
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+  tagTypes: ["Jobs"], // Define a tag type
+
   endpoints: (builder) => ({
     getJobs: builder.query({
       query: () => ({
         url: "/allposts",
         method: "GET",
       }),
+      providesTags: ["Jobs"], // Tag this query
     }),
     getJob: builder.query({
       query: (jobId) => ({
@@ -31,6 +34,7 @@ export const jobApiSlice = createApi({
         method: "POST",
         body: { ...jobData, userId: getUserIdFromLocalStorage() },
       }),
+      invalidatesTags: ["Jobs"], // Invalidate 'Jobs' on success
     }),
     updateJob: builder.mutation({
       query: ({ jobId, ...jobData }) => ({
@@ -38,13 +42,15 @@ export const jobApiSlice = createApi({
         method: "PUT",
         body: { ...jobData, jobId, userId: getUserIdFromLocalStorage() },
       }),
+      invalidatesTags: ["Jobs"], // Invalidate 'Jobs' on success
     }),
     deleteJob: builder.mutation({
       query: (jobId) => ({
-        url: "/deletejob",
+        url: `/delete`,
         method: "DELETE",
         body: { jobId, userId: getUserIdFromLocalStorage() },
       }),
+      invalidatesTags: ["Jobs"], // Invalidate 'Jobs' on success
     }),
   }),
 });

@@ -2,14 +2,26 @@ import Map from "./Map";
 import styles from "./offerPage.module.css";
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { useGetJobQuery } from "../slices/jobApiSlice";
+import { useDeleteJobMutation, useGetJobQuery } from "../slices/jobApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 const OfferPage = () => {
   const { id: jobId } = useParams();
   const { userInfo } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [deleteApiCall] = useDeleteJobMutation();
+  const deleteHandler = async () => {
+    try {
+      console.log(jobId);
+      await deleteApiCall(jobId).unwrap();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const { data, isLoading, error } = useGetJobQuery(jobId);
+
   console.log(userInfo.user);
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading jobs!</p>;
@@ -58,7 +70,7 @@ const OfferPage = () => {
           {/* </p>{" "}
           </div> */}{" "}
           {userInfo.user === data[0].userId ? (
-            <h1>Can delete</h1>
+            <button onClick={deleteHandler}>Can delete</button>
           ) : (
             <h2>cannot delete</h2>
           )}

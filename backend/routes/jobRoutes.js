@@ -45,11 +45,17 @@ router.post("/updatejob", auth, async (req, res) => {
 });
 
 router.delete("/delete", auth, async (req, res) => {
-  const userId = req.body._id;
   try {
-    if (auth._id === userId) {
-      await Job.findByIdAndDelete({ _id: userId });
+    const { userId } = req.body;
+    const { jobId } = req.body;
+    console.log(jobId);
+    const job = await Job.find({ _id: jobId });
+    console.log(job);
+    if (job[0].userId == userId) {
+      console.log(jobId);
+      await Job.findByIdAndDelete({ _id: jobId });
       console.log("Deleted");
+      res.send({ msg: "done" });
     } else {
       console.log("cannot delete");
     }

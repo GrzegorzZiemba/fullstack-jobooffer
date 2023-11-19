@@ -18,7 +18,7 @@ const LoginAccountForm = () => {
     try {
       console.log(values);
       const user = await loginUser(values).unwrap();
-      console.log(user);
+      console.log({ ...user });
       dispatch(setCredentials({ ...user }));
 
       // Navigate to some page after successful creation, e.g., login page

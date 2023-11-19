@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import DeleteData from "./DeleteData";
 
 // Update Material-UI core imports to MUI version 5
 import Card from "@mui/material/Card";
