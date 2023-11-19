@@ -7,6 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm install --prefix backend && npm install --prefix frontend && npm install leaflet --prefix frontend && npm run build --prefix frontend"
   },
+  "engines": {
+    "node": ">=15.0.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"
