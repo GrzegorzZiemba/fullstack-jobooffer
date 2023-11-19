@@ -5,12 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm install --prefix backend && npm install --prefix frontend && npm install leaflet --prefix frontend && npm run build --prefix frontend"
+    "build": "npm install && npm install --prefix backend && npm install --prefix frontend && npm install leaflet --prefix frontend && npm run build --prefix frontend",
+    "start": "concurrently \"npm start --prefix backend\" \"npm start --prefix frontend\""
   },
   "engines": {
     "node": ">=15.0.0"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
 }
