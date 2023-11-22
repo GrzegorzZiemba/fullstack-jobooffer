@@ -13,20 +13,15 @@ const OfferPage = () => {
   const [deleteApiCall] = useDeleteJobMutation();
   const deleteHandler = async () => {
     try {
-      console.log(jobId);
       await deleteApiCall(jobId).unwrap();
       navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const { data, isLoading, error } = useGetJobQuery(jobId);
 
-  console.log(userInfo.user);
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading jobs!</p>;
-  console.log(data[0]);
   return (
     <div className={styles.container}>
       <div className={styles.left}>

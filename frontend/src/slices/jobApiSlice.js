@@ -4,7 +4,6 @@ import { BASE_URL } from "../constans";
 
 const getUserIdFromLocalStorage = () => {
   const currentUser = localStorage.getItem("userInfo");
-  console.log(currentUser);
 
   return currentUser ? JSON.parse(currentUser).user : undefined;
 };

@@ -8,9 +8,7 @@ import { useGetJobQuery, useUpdateJobMutation } from "../slices/jobApiSlice";
 
 const EditJobPage = () => {
   const { id: jobId } = useParams();
-  console.log(jobId);
   const { data, isLoading, error } = useGetJobQuery(jobId);
-  console.log(data);
   const [editJobPost] = useUpdateJobMutation();
   const navigate = useNavigate();
   const handleSubmit = async (values) => {
@@ -20,14 +18,13 @@ const EditJobPage = () => {
     };
     try {
       const response = await editJobPost(payload).unwrap();
-      console.log(response);
       if (response.data) {
         navigate("/");
       } else {
-        console.log("Error");
+        console.error("Error");
       }
     } catch (error) {
-      console.log("Error in error :D");
+      console.error("Error in error :D");
     }
   };
   if (isLoading) return <p>Loading...</p>;

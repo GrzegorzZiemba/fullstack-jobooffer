@@ -16,9 +16,7 @@ const LoginAccountForm = () => {
 
   const handleSubmit = async (values) => {
     try {
-      console.log(values);
       const user = await loginUser(values).unwrap();
-      console.log({ ...user });
       dispatch(setCredentials({ ...user }));
 
       // Navigate to some page after successful creation, e.g., login page
@@ -35,11 +33,6 @@ const LoginAccountForm = () => {
         email: Yup.string(),
         password: Yup.string(),
       })}
-      // onSubmit={(values, { setSubmitting }) => {
-      // 	 console.log(values.email)
-      // 	console.log(values.password)
-
-      // }}
       onSubmit={handleSubmit}
     >
       <div className={styles.formContainer}>

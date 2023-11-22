@@ -12,7 +12,6 @@ import Typography from "@mui/material/Typography";
 import { LinkContainer } from "react-router-bootstrap";
 
 const ShowOffers = ({ image, id, position }) => {
-  console.log(id);
   return (
     <Card style={{ width: 345, margin: 20 }}>
       <LinkContainer to={`/offer/${id}`}>
@@ -46,7 +45,6 @@ const ShowOffers = ({ image, id, position }) => {
 					<DeleteData id={id} className="button" />
 				</CardActions>
 			) : (
-				<div>{console.log(uid, iden)}</div>
 			)} */}
     </Card>
   );
