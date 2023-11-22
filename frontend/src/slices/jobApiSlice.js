@@ -11,7 +11,7 @@ const getUserIdFromLocalStorage = () => {
 
 export const jobApiSlice = createApi({
   reducerPath: "jobApi",
-  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}/api/jobs` }),
   tagTypes: ["Jobs"], // Define a tag type
 
   endpoints: (builder) => ({
