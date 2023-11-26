@@ -28,7 +28,6 @@ const Map = ({ city, work }) => {
           }
         })
         .catch((error) => {
-          console.error("Fetch error:", error);
           setPos([51.505, -0.09]); // Default position on error
         });
     }

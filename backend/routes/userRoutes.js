@@ -53,7 +53,7 @@ router.post("/logout", auth, async (req, res) => {
       res.status(400).send({ error: "Cannot logout" });
     }
   } else {
-    console.error(error);
+    res.status(400).send({ error: "Cannot logout" });
   }
 });
 

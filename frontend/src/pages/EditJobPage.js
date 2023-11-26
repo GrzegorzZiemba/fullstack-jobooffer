@@ -24,7 +24,7 @@ const EditJobPage = () => {
         console.error("Error");
       }
     } catch (error) {
-      console.error("Error in error :D");
+      console.error("Error");
     }
   };
   if (isLoading) return <p>Loading...</p>;

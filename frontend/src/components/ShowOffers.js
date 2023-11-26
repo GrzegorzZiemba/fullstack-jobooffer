@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
+import { useDeleteJobMutation } from "../slices/jobApiSlice";
 // Update Material-UI core imports to MUI version 5
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
@@ -13,8 +14,16 @@ import Typography from "@mui/material/Typography";
 import { LinkContainer } from "react-router-bootstrap";
 
 const ShowOffers = ({ image, id, position, author }) => {
-  const { userInfo } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
+  const { userInfo } = useSelector((state) => state.auth);
+  const [deleteApiCall] = useDeleteJobMutation();
+  const deleteHandler = async () => {
+    try {
+      await deleteApiCall(id).unwrap();
+      navigate("/");
+    } catch (error) {}
+  };
   return (
     <Card style={{ width: 345, margin: 20 }}>
       <LinkContainer to={`/offer/${id}`}>
@@ -33,17 +42,15 @@ const ShowOffers = ({ image, id, position, author }) => {
       {userInfo?.user ? (
         userInfo?.user === author ? (
           <CardActions>
-            <Link to={`/edit/${id}`}>
-              <Button size="small" color="primary">
-                Edit
+            <div>
+              <Button variant="danger" onClick={deleteHandler}>
+                Delete
               </Button>
-            </Link>
 
-            {/* <Button size="small" color="primary" disabled>
-            Edit
-          </Button> */}
-
-            {/* <DeleteData id={id} className="button" /> */}
+              <LinkContainer to={`/edit/${id}`}>
+                <Button variant="primary">Edit</Button>
+              </LinkContainer>
+            </div>
           </CardActions>
         ) : (
           <></>

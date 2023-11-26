@@ -11,10 +11,8 @@ const AddJobPage = () => {
   let navigate = useNavigate();
 
   const handleSubmit = async (values) => {
-    console.log("AddJobPost");
     try {
       const response = await createJobPost(values);
-      console.log("Response:", response); // Log the full response
       if (response.data) {
         navigate("/");
       } else {

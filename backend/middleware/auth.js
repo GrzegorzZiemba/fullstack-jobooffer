@@ -15,7 +15,6 @@ const auth = async (req, res, next) => {
 
       next();
     } catch (error) {
-      console.error(error);
       res.status(401).send({ msg: "Wrong Token" });
     }
   } else {

@@ -51,11 +51,6 @@ const Navigation = () => {
             </button>
           ) : (
             <>
-              <Link to="/signout" className={styles.nofocus}>
-                <BsPersonFillAdd />
-                <p className={styles.paragraph}>Sign out</p>
-              </Link>
-
               <Link to="/login" className={styles.nofocus}>
                 <BsPersonFillLock />
                 <p className={styles.paragraph}>Sign in</p>
