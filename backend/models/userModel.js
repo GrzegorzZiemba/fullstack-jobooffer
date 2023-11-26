@@ -35,7 +35,6 @@ const userSchema = new mongoose.Schema({
 
   tokens: {
     type: String,
-    required: true,
   },
 });
 

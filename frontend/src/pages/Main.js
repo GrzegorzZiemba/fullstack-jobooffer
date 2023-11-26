@@ -27,6 +27,7 @@ const Main = () => {
             position={item.position}
             iden={item.uid}
             key={index}
+            author={item.userId}
           />
         ))}
     </div>

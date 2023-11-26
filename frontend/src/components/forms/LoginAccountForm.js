@@ -54,6 +54,13 @@ const LoginAccountForm = () => {
           <Button className="button-main" type="submit">
             Submit
           </Button>
+          {isError && (
+            <div style={{ color: "red" }}>
+              {/* Customize this message based on the error object */}
+              {error?.data?.message ||
+                "Login failed. Please check your credentials."}
+            </div>
+          )}
         </Form>
       </div>
     </Formik>

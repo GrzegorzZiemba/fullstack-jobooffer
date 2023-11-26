@@ -6,15 +6,24 @@ const router = express.Router();
 
 router.post("/createuser", async (req, res) => {
   try {
-    const user = req.body;
-    const createUser = new User({
-      ...user,
-    });
-    await createUser.save();
-    const token = await createUser.generateAuthToken();
-    res.send({ token });
+    const checkEmail = await User.find({ email: req.body.email });
+    if (checkEmail.length > 1) {
+      const user = req.body;
+      const createUser = new User({
+        ...user,
+      });
+      await createUser.save();
+      const token = await createUser.generateAuthToken();
+      res.cookie("jwt", token, {
+        httpOnly: true,
+        maxAge: 580000000,
+      });
+      res.send({ user: createUser._id });
+    } else {
+      res.status(400).send({ error: "Cannot login" });
+    }
   } catch (error) {
-    console.error(error);
+    res.status(400).send({ error: "Cannot login" });
   }
 });
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // Update Material-UI core imports to MUI version 5
 import Card from "@mui/material/Card";
@@ -11,7 +12,9 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { LinkContainer } from "react-router-bootstrap";
 
-const ShowOffers = ({ image, id, position }) => {
+const ShowOffers = ({ image, id, position, author }) => {
+  const { userInfo } = useSelector((state) => state.auth);
+
   return (
     <Card style={{ width: 345, margin: 20 }}>
       <LinkContainer to={`/offer/${id}`}>
@@ -27,25 +30,27 @@ const ShowOffers = ({ image, id, position }) => {
           </CardContent>
         </CardActionArea>
       </LinkContainer>
+      {userInfo?.user ? (
+        userInfo?.user === author ? (
+          <CardActions>
+            <Link to={`/edit/${id}`}>
+              <Button size="small" color="primary">
+                Edit
+              </Button>
+            </Link>
 
-      {/* {uid === iden && uid !== "" ? (
-				<CardActions>
-					{activeTill > today ? (
-						<Link to={`/edit/${id}`}>
-							<Button size="small" color="primary">
-								Edit
-							</Button>
-						</Link>
-					) : (
-						<Button size="small" color="primary" disabled>
-							Edit
-						</Button>
-					)}
+            {/* <Button size="small" color="primary" disabled>
+            Edit
+          </Button> */}
 
-					<DeleteData id={id} className="button" />
-				</CardActions>
-			) : (
-			)} */}
+            {/* <DeleteData id={id} className="button" /> */}
+          </CardActions>
+        ) : (
+          <></>
+        )
+      ) : (
+        <></>
+      )}
     </Card>
   );
 };
