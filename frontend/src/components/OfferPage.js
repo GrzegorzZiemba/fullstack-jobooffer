@@ -66,7 +66,7 @@ const OfferPage = () => {
 								: " Offer is not valid "} */}
           {/* </p>{" "}
           </div> */}{" "}
-          {userInfo.user === data[0].userId ? (
+          {userInfo?.user === data[0].userId ? (
             <div>
               <Button variant="danger" onClick={deleteHandler}>
                 Delete
