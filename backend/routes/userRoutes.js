@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/createuser", async (req, res) => {
   try {
     const checkEmail = await User.find({ email: req.body.email });
-    if (checkEmail.length > 1) {
+    if (checkEmail.length < 1) {
       const user = req.body;
       const createUser = new User({
         ...user,
