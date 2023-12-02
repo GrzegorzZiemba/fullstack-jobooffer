@@ -33,6 +33,13 @@ export const userApiSlice = createApi({
       }),
       invalidatesTags: ["Jobs"], // Invalidate 'Jobs' on success
     }),
+    applyUser: builder.mutation({
+      query: ({ jobId, userId }) => ({
+        url: "/apply",
+        method: "POST",
+        body: { jobId, userId },
+      }),
+    }),
     logoutUser: builder.mutation({
       query: () => ({
         url: "/logout",
@@ -47,6 +54,7 @@ export const userApiSlice = createApi({
 
 export const {
   useGetUserQuery,
+  useApplyUserMutation,
   useCreateUserMutation,
   useLoginUserMutation,
   useLogoutUserMutation,

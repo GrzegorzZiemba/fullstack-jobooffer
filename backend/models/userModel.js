@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
     required: false,
     default: false,
   },
-
+  applied: [{ type: String }],
   tokens: {
     type: String,
   },

@@ -1,7 +1,7 @@
 import express from "express";
 import User from "../models/userModel.js";
 import auth from "../middleware/auth.js";
-
+import Job from "../models/jobModel.js";
 const router = express.Router();
 
 router.post("/createuser", async (req, res) => {
@@ -88,6 +88,36 @@ router.post("/logout", auth, async (req, res) => {
     }
   } else {
     res.status(400).send({ error: "Cannot logout" });
+  }
+});
+
+router.post("/apply", auth, async (req, res) => {
+  try {
+    const jobId = req.body.jobId;
+    const userId = req.body.userId;
+
+    console.log(req.body);
+    // Find both users
+    const user = await User.findById(userId);
+    const job = await Job.findById(jobId);
+    console.log("USER");
+
+    // Check if they are already friends
+    if (!user.applied.includes(jobId) && !job.applied.includes(userId)) {
+      user.applied.push(jobId);
+      job.applied.push(userId);
+      // Save the updates
+      await user.save();
+      await job.save();
+
+      res.send({ data: "done" });
+    } else {
+      // They are already friends
+      res.status(400).send({ error: "Cannot Apply" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(400).send({ error: "Cannot Apply" });
   }
 });
 

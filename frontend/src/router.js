@@ -14,6 +14,7 @@ import AddJobPage from "./pages/AddJobPage";
 import EditJobPage from "./pages/EditJobPage";
 import NotFoundPage from "./NotFoundPage";
 import ManageUserPage from "./pages/ManageUserPage";
+import ApplyPage from "./pages/ApplyPage";
 // import SignOut from "./components/SignOut";
 // import EditJobForm from "./components/EditJobForm"; // Assuming you have this component
 export const router = createBrowserRouter(
@@ -32,6 +33,7 @@ export const router = createBrowserRouter(
       <Route element={<PrivateRoute />}>
         <Route path="addnewjob" element={<AddJobPage />} />
         <Route path="manageuser" element={<ManageUserPage />} />
+        <Route path="/apply/:id" element={<ApplyPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Route>

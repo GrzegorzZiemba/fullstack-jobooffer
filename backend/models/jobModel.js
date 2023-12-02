@@ -9,6 +9,7 @@ const jobSchema = new mongoose.Schema(
     city: { type: String, required: true },
     description: { type: String, required: true },
     userId: { type: mongoose.Types.ObjectId, ref: "User" },
+    applied: [{ type: String }],
   },
   {
     timestamps: {

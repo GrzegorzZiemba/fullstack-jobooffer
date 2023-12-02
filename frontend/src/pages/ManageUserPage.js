@@ -23,10 +23,10 @@ const ManageUserPage = () => {
       if (response.data) {
         navigate("/");
       } else {
-        console.error("Error");
+        console.log(response);
       }
     } catch (error) {
-      console.error("Error");
+      console.log("You already get that");
     }
   };
   console.log(userInfo);
