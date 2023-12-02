@@ -45,10 +45,17 @@ const Navigation = () => {
           <span className={styles.separator}></span>
 
           {userInfo ? (
-            <button className={styles.button} onClick={logoutHandler}>
-              <BsPersonFillAdd />
-              <p className={styles.paragraph}>Sign out</p>
-            </button>
+            <>
+              <button className={styles.button}>
+                <Link to="/manageuser" className={styles.nofocus}>
+                  <p className={styles.paragraph}>Manage User</p>
+                </Link>
+              </button>
+              <button className={styles.button} onClick={logoutHandler}>
+                <BsPersonFillAdd />
+                <p className={styles.paragraph}>Sign out</p>
+              </button>
+            </>
           ) : (
             <>
               <Link to="/login" className={styles.nofocus}>

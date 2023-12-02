@@ -29,6 +29,15 @@ router.post("/createuser", async (req, res) => {
   }
 });
 
+router.get("/userinfo", auth, async (req, res) => {
+  console.log(req.user + " //// ");
+  res.send({
+    username: req.user.username,
+    email: req.user.email,
+    isRecruiter: req.user.isRecruiter,
+  });
+});
+
 router.post("/login", async (req, res) => {
   try {
     const user = await User.loginUser(req.body.email, req.body.password);
@@ -41,6 +50,29 @@ router.post("/login", async (req, res) => {
     res.send({ user: user._id });
   } catch (e) {
     res.status(400).send({ error: "Cannot login" });
+  }
+});
+
+router.post("/updateuser", auth, async (req, res) => {
+  if (auth) {
+    try {
+      console.log(req.body);
+
+      if (req.user._id == req.body.userInfo.user) {
+        await User.findByIdAndUpdate(
+          {
+            _id: req.user._id,
+          },
+          {
+            username: req.body.username,
+            isRecruiter: req.body.isRecruiter,
+          }
+        );
+        console.log("Hello");
+      }
+    } catch (error) {
+      console.log("hello");
+    }
   }
 });
 

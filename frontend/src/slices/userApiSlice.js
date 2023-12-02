@@ -12,12 +12,26 @@ export const userApiSlice = createApi({
         body: userData,
       }),
     }),
+    getUser: builder.query({
+      query: () => ({
+        url: `/userinfo`,
+        method: "GET",
+      }),
+    }),
     loginUser: builder.mutation({
       query: (credentials) => ({
         url: "/login",
         method: "POST",
         body: credentials,
       }),
+    }),
+    updateUser: builder.mutation({
+      query: ({ userId, ...userData }) => ({
+        url: "/updateUser",
+        method: "POST",
+        body: { ...userData, userId },
+      }),
+      invalidatesTags: ["Jobs"], // Invalidate 'Jobs' on success
     }),
     logoutUser: builder.mutation({
       query: () => ({
@@ -32,7 +46,9 @@ export const userApiSlice = createApi({
 });
 
 export const {
+  useGetUserQuery,
   useCreateUserMutation,
   useLoginUserMutation,
   useLogoutUserMutation,
+  useUpdateUserMutation,
 } = userApiSlice;

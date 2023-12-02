@@ -70,9 +70,14 @@ const OfferPage = () => {
             <></>
           )}
         </div>
-        <Link className="btn btn-light my-3" to="/">
-          Home
-        </Link>
+        <div style={{ margin: "40px", padding: "20px" }}>
+          <LinkContainer to={`/`}>
+            <Button variant="secondary">Home</Button>
+          </LinkContainer>{" "}
+          <LinkContainer to={`/apply/${jobId}`}>
+            <Button variant="primary">APPLY</Button>
+          </LinkContainer>
+        </div>
       </div>
       <div className={styles.map}>
         <Map city={data[0].city} work={data[0].company} />
