@@ -1,10 +1,10 @@
 import express from "express";
 import Job from "../models/jobModel.js";
 import auth from "../middleware/auth.js";
-
+import isRecruiter from "../middleware/isRecruiter.js";
 const router = express.Router();
 
-router.post("/createjob", auth, async (req, res) => {
+router.post("/createjob", auth, isRecruiter, async (req, res) => {
   try {
     const jobbody = req.body;
     if (auth) {

@@ -5,10 +5,10 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-import Signup from "./components/Signup";
+// import Signup from "./components/Signup";
 import Main from "./pages/Main";
-import Login from "./components/Login";
-import OfferPage from "./components/OfferPage";
+import Login from "./pages/Login";
+import OfferPage from "./pages/OfferPage";
 import PrivateRoute from "./components/PrivateRoute";
 import AddJobPage from "./pages/AddJobPage";
 import EditJobPage from "./pages/EditJobPage";
@@ -22,7 +22,7 @@ export const router = createBrowserRouter(
       <Route index element={<Main />} />
 
       {/* Other public routes */}
-      <Route path="signup" element={<Signup />} />
+      {/* <Route path="signup" element={<Signup />} /> */}
       <Route path="login" element={<Login />} />
       <Route path="offer" element={<OfferPage />} />
       <Route path="/offer/:id" element={<OfferPage />} />

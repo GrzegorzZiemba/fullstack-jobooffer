@@ -1,4 +1,4 @@
-import Map from "./Map";
+import Map from "../components/Map";
 import styles from "./offerPage.module.css";
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
@@ -55,17 +55,7 @@ const OfferPage = () => {
             <h3>Description </h3>
             <p>{data[0].description}</p>
           </div>
-          {/* <div className={styles.info}>
-            <h3>Expiry Date</h3>
-            <p>
-              Offer is not valid
-              {/* {" "}
-							<i class="far fa-calendar-alt"></i>{" "}
-							{formatDate(activeTill) !== "NaN-NaN-NaN"
-								? formatDate(activeTill)
-								: " Offer is not valid "} */}
-          {/* </p>{" "}
-          </div> */}{" "}
+
           {userInfo?.user === data[0].userId ? (
             <div>
               <Button variant="danger" onClick={deleteHandler}>

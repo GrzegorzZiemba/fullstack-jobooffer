@@ -35,6 +35,7 @@ const CreateAccountForm = () => {
           .email("Invalid email address")
           .required("Email is required"),
         password: Yup.string().required("Password is required"),
+        isRecruiter: Yup.string().required("Selection is required"),
       })}
       onSubmit={handleSubmit}
     >
@@ -57,7 +58,16 @@ const CreateAccountForm = () => {
             component="div"
             style={{ color: "red" }}
           />
-
+          <Field as="select" name="isRecruiter" className={styles.formField}>
+            <option value="" label="Who are you?" />
+            <option value="true" label="Recruiter" />
+            <option value="false" label="Candidate" />
+          </Field>
+          <ErrorMessage
+            name="isRecruiter"
+            component="div"
+            style={{ color: "red" }}
+          />
           <Button className="button-main" type="submit">
             Submit
           </Button>

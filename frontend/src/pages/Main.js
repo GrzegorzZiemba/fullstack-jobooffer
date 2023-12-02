@@ -1,5 +1,5 @@
 import React from "react";
-import ShowOffers from "../components/ShowOffers";
+import ShowOffers from "./ShowOffers";
 import { useGetJobsQuery } from "../slices/jobApiSlice";
 
 const Main = () => {

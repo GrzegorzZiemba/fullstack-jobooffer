@@ -7,8 +7,10 @@ const router = express.Router();
 router.post("/createuser", async (req, res) => {
   try {
     const checkEmail = await User.find({ email: req.body.email });
+    console.log(checkEmail);
     if (checkEmail.length < 1) {
       const user = req.body;
+      console.log(user);
       const createUser = new User({
         ...user,
       });
