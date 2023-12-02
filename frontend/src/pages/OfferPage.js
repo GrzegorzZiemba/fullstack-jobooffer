@@ -23,9 +23,7 @@ const OfferPage = () => {
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading jobs!</p>;
-  console.log(data[0].applied);
-  console.log(userInfo.user);
-  console.log(data[0].applied.includes(userInfo.user));
+
   return (
     <div className={styles.container}>
       <div className={styles.left}>

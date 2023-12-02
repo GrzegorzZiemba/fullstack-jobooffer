@@ -38,7 +38,6 @@ const ApplyPage = () => {
   const handleApply = async () => {
     try {
       const user = userInfo.user;
-      console.log(user);
       const payload = {
         jobId: jobId,
         userId: user,
@@ -53,7 +52,6 @@ const ApplyPage = () => {
         );
       }
     } catch (error) {
-      console.log(".");
       message.error(
         "Unfortunalty you cannot Apply - maybe you are in the Database already ! :) "
       );

@@ -6,13 +6,10 @@ const auth = async (req, res, next) => {
 
   // Read JWT from the 'jwt' cookie
   token = req.cookies.jwt;
-  console.log(token);
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.SECRET_JWT);
-      console.log(decoded);
       req.user = await User.findById(decoded._id);
-      console.log(req.user);
 
       next();
     } catch (error) {

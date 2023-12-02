@@ -6,13 +6,10 @@ const isRecruriter = async (req, res, next) => {
 
   // Read JWT from the 'jwt' cookie
   token = req.cookies.jwt;
-  console.log("RECRUITER ");
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.SECRET_JWT);
-      console.log(decoded);
       req.user = await User.findById(decoded._id);
-      console.log(req.user.isRecruiter);
       if (req.user.isRecruiter) {
         next();
       } else {
